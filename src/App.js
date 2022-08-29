@@ -1,12 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
 import NavBar from "./components/NavBar";
+import ItemListContainer from "./components/ItemListContainer";
+import { Box } from "@mui/material";
 
 function App() {
   return (
-    <div>
+    <>
       <NavBar />
-    </div>
+      <ItemListContainer />
+    </>
   );
 }
 

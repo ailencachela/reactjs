@@ -1,30 +1,32 @@
 import {
   AppBar,
   Toolbar,
-  IconButton,
   Typography,
   MenuItem,
-  Box,
 } from "@mui/material";
+import CartWidget from "./CartWidget";
 
 export default function NavBar() {
-  const items = ["Inicio", "Productos", "Contáctanos", "Carrito"];
+  const items = ["Inicio", "Productos", "Contáctanos"];
   return (
-    <div>
-      <AppBar component="nav">
+    <>
+      <AppBar>
         <Toolbar>
-          <IconButton>
-            <Typography variant="h4" color="white">
-              JANA
-            </Typography>
-          </IconButton>
+          <Typography variant="h4" color="white" sx={{ flexGrow: 1 }}>
+            JANA
+          </Typography>
           {items.map((item) => (
             <MenuItem>
               <Typography textAlign="center">{item}</Typography>
             </MenuItem>
           ))}
+          <MenuItem>
+            <CartWidget />
+          </MenuItem>
         </Toolbar>
       </AppBar>
-    </div>
+
+      <Toolbar />
+    </>
   );
 }
