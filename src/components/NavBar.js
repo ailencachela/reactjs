@@ -1,9 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  MenuItem,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, MenuItem } from "@mui/material";
 import CartWidget from "./CartWidget";
 
 export default function NavBar() {
@@ -16,17 +11,15 @@ export default function NavBar() {
             JANA
           </Typography>
           {items.map((item) => (
-            <MenuItem>
+            <MenuItem key={item}>
               <Typography textAlign="center">{item}</Typography>
             </MenuItem>
           ))}
-          <MenuItem>
+          <MenuItem key={"cart"}>
             <CartWidget />
           </MenuItem>
         </Toolbar>
       </AppBar>
-
-      <Toolbar />
     </>
   );
 }
