@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <ItemListContainer />
+      <ItemListContainer saludo={"Bienvenidos a JANA Cosmética Natural"} />
     </>
   );
 }
