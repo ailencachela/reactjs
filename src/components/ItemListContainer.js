@@ -1,127 +1,72 @@
 import { Add, Remove } from "@mui/icons-material";
-import { Button, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import ItemList from "./ItemList";
 
-export default function ItemListContainer({ stock }) {
-  const [stockAvailable, setStockAvailable] = useState(0);
-  const [count, setCount] = useState(0);
+const mockItems = [
+  {
+    id: "jabon",
+    title: "Jabón",
+    description: "Jabón hecho a base de elementos naturales.",
+    price: 120,
+    pictureUrl:
+      "https://faunacosmeticanatural.com/wp-content/uploads/2020/12/diferenciashampoosolidoyjabon-min.jpg",
+  },
+  {
+    id: "cepillo",
+    title: "Cepillo",
+    description: "Cepillo de bambú ecológico.",
+    price: 200,
+    pictureUrl:
+      "https://tse2.mm.bing.net/th?id=OIP.Ays5sVqpsMJMh1tm0Z5yyAHaHa&pid=Api&P=0",
+  },
+  {
+    id: "combo_natural",
+    title: "Combo natural",
+    description: "Productos seleccionados de marca propia ideales para regalo.",
+    price: 500,
+    pictureUrl:
+      "https://i.pinimg.com/originals/ac/5a/31/ac5a312b6bde15e239f90731f44f90c1.jpg",
+  },
+  {
+    id: "combo_economico",
+    title: "Combo Económico",
+    description:
+      "Este combo es ideal para ahorrar y no perderse la calidad de nuestros productos.",
+    price: 400,
+    pictureUrl:
+      "https://www.fmdos.cl/wp-content/uploads/2019/10/shampoo-solido-jabon-barra.jpg",
+  },
+  {
+    id: "shampoo",
+    title: "Shampoo sólido",
+    description: "Shampoo limpiador hecho a base de elementos naturales.",
+    price: 100,
+    pictureUrl:
+      "https://tse3.mm.bing.net/th?id=OIP.CAmqjOBBwvV-_TS0iRK2cwHaEW&pid=Api&P=0",
+  },
+  {
+    id: "acondicionador",
+    title: "Acondicionador Apto Vegan",
+    description:
+      "Acondicionador hecho a base de elementos naturales. Apto vegano.",
+    price: 120,
+    pictureUrl:
+      "https://i.pinimg.com/736x/4d/8c/07/4d8c07edaaefcec3f38b310ea03abdf7.jpg",
+  },
+];
 
-  useEffect(() => {
-    setStockAvailable(stock);
-  }, []);
+export default function ItemListContainer({}) {
+  const [items, setItems] = useState([]);
 
-  function increaseCount() {
-    if (stockAvailable === 0) {
-      alert("No hay más stock disponible!");
-      return;
-    }
-    if (count >= stockAvailable) {
-      alert(`Solo hay ${count} unidades disponibles!`);
-    } else {
-      setCount(count + 1);
-    }
-  }
-
-  function decreaseCount() {
-    if (count === 0) {
-      alert("No puedes seleccionar menos que 0 items");
-    } else {
-      setCount(count - 1);
-    }
-  }
-
-  function addToCart() {
-    if (count === 0) {
-        alert("Tienes que seleccionar al menos una unidad para comprar")
-        return
-    }
-    if (count > stockAvailable) {
-      alert(`No hay suficiente stock, solo hay ${stockAvailable} unidades`);
-    } else {
-      alert(`Has comprado ${count} unidades!`);
-      setCount(0);
-      setStockAvailable(stockAvailable - count);
-    }
-  }
+  setTimeout(() => {
+    setItems(mockItems);
+  }, 2000);
 
   return (
     <>
-      {stock > 0 ? (
-        <div style={main_div}>
-          <Typography variant="h4" style={title}>
-            ¡Hay {stockAvailable} unidades disponibles!
-          </Typography>
-          <div style={outer_box}>
-            <div style={counter_box}>
-              <div style={number_box}>
-                <h3>{count}</h3>
-              </div>
-              <div>
-                <Tooltip title="Aumentar">
-                  <Button onClick={increaseCount} style={button}>
-                    <Add />
-                  </Button>
-                </Tooltip>
-                <Tooltip title="Disminuir">
-                  <Button onClick={decreaseCount} style={button}>
-                    <Remove />
-                  </Button>
-                </Tooltip>
-              </div>
-              <div>
-                <Tooltip title="Agregar al carrito">
-                  <Button onClick={addToCart} style={button}>
-                    <Typography>Agregar al carrito</Typography>
-                  </Button>
-                </Tooltip>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      <div style={{ paddingTop: "120px" }}></div>
+      <ItemList items={items} />
     </>
   );
 }
-
-const main_div = {
-  paddingTop: "100px",
-  textAlign: "center",
-  justifyContent: "center",
-  background: "floralwhite",
-};
-
-const title = {
-  marginTop: "100px",
-};
-
-const outer_box = {
-  width: "100%",
-  height: "100vh",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-const counter_box = {
-  marginBottom: "400px",
-  width: "320px",
-  height: "320px",
-  background: "lightpink",
-  boxShadow: "5px 5px 20px -5px",
-  borderRadius: "5%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const number_box = {
-  width: "100%",
-  textAlign: "center",
-  color: "white",
-  background: "grey",
-};
-
-const button = {
-  padding: "20px 40px",
-};
