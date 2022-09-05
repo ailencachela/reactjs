@@ -12,7 +12,7 @@ export default function Item({ title, description, price, pictureUrl }) {
       <CardActionArea>
         <CardMedia
           component="img"
-          sx={{ height: "140px", width: "140px" }}
+          sx={{ height: "140px", width: "100%" }}
           image={pictureUrl}
           alt={title}
         />

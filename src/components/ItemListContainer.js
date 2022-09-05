@@ -1,6 +1,7 @@
 import { Add, Remove } from "@mui/icons-material";
 import { Box, Button, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import ItemDetail from "./ItemDetail";
 import ItemList from "./ItemList";
 
 const mockItems = [
@@ -58,15 +59,22 @@ const mockItems = [
 
 export default function ItemListContainer({}) {
   const [items, setItems] = useState([]);
+  const [detailedItem, setDetailedItem] = useState(null);
 
   setTimeout(() => {
     setItems(mockItems);
   }, 2000);
 
+  function selectItem(id) {
+    const selectedItem = items.filter((element) => element.id === id);
+    setDetailedItem(selectedItem[0]);
+  }
+
   return (
     <>
       <div style={{ paddingTop: "120px" }}></div>
-      <ItemList items={items} />
+      <ItemDetail item={detailedItem} />
+      <ItemList items={items} selectItem={selectItem} />
     </>
   );
 }
