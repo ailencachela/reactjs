@@ -31,9 +31,6 @@ export default function ItemDetail({ item }) {
                   {item.price}
                 </Typography>
               </CardContent>
-              <Button>
-                <Typography>Abrir página del producto</Typography>
-              </Button>
             </CardActionArea>
           </Card>
         ) : null}
