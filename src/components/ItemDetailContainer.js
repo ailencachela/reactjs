@@ -14,7 +14,6 @@ export default function ItemDetailContainer({ mockItems }) {
 
   return (
     <>
-      <NavBarPadding />
       <ItemDetail item={item} />
     </>
   );

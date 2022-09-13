@@ -11,7 +11,6 @@ export default function ItemListContainer({ mockItems }) {
 
   return (
     <>
-      <NavBarPadding />
       <ItemList items={items} />
     </>
   );

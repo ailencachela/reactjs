@@ -6,8 +6,12 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
+import ItemCount from "./ItemCount";
 
 export default function ItemDetail({ item }) {
+  const [selectedCount, setSelectedCount] = useState(null);
+
   return (
     <>
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
@@ -30,6 +34,10 @@ export default function ItemDetail({ item }) {
                 <Typography variant="body2" color="text.secondary">
                   {item.price}
                 </Typography>
+                <ItemCount
+                  selectedCount={selectedCount}
+                  setSelectedCount={setSelectedCount}
+                />
               </CardContent>
             </CardActionArea>
           </Card>

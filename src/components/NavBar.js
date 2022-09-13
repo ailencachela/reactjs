@@ -41,6 +41,7 @@ export default function NavBar() {
           </MenuItem>
         </Toolbar>
       </AppBar>
+      <div style={{ height: "80px" }}></div>
     </>
   );
 }

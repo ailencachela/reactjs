@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import { mockItems } from "./MockItems";
 import AboutUs from "./components/AboutUs";
+import Cart from "./components/Cart";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             element={<ItemDetailContainer mockItems={mockItems} />}
           />
           <Route exact path="/about-us" element={<AboutUs />} />
+          <Route exact path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </>
