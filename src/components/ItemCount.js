@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export default function ItemCount({ selectedCount, setSelectedCount }) {
+export default function ItemCount({ selectedCount, addToCart }) {
   const [count, setCount] = useState(0);
 
   function increment() {
@@ -36,7 +36,7 @@ export default function ItemCount({ selectedCount, setSelectedCount }) {
           <Button
             style={{ width: "100%" }}
             onClick={() => {
-              setSelectedCount(count);
+              addToCart(count);
             }}
           >
             <Typography>Agregar al carrito</Typography>
