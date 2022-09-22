@@ -23,8 +23,21 @@ function CartContextProvider({ defaultValue = [], children }) {
     setProducts([]);
   }
 
+  function removeItem(item) {
+    if (isInCart(item.id)) {
+      item.count = item.count - 1;
+      if (item.count === 0) {
+        const newProds = products.filter((el) => el.id !== item.id);
+        setProducts(newProds);
+        console.log(newProds);
+      }
+    }
+  }
+
   return (
-    <CartContext.Provider value={{ products, addToCart, isInCart, clear }}>
+    <CartContext.Provider
+      value={{ products, addToCart, isInCart, clear, removeItem }}
+    >
       {children}
     </CartContext.Provider>
   );

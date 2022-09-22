@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ItemList from "./ItemList";
-import NavBarPadding from "./NavBarPadding";
 
 export default function ItemListContainer({ mockItems }) {
   const [items, setItems] = useState([]);

@@ -1,8 +1,11 @@
 import { AppBar, Toolbar, Typography, MenuItem } from "@mui/material";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { CartContext } from "./CartContext";
 import CartWidget from "./CartWidget";
 
 export default function NavBar() {
+  const cartContext = useContext(CartContext);
   const items = [
     {
       id: "home",
@@ -36,9 +39,13 @@ export default function NavBar() {
               </NavLink>
             </MenuItem>
           ))}
-          <MenuItem key={"cart"}>
-            <CartWidget />
-          </MenuItem>
+          {cartContext.products.length > 0 ? (
+            <MenuItem key={"cart"}>
+              <NavLink to="/cart" style={{ color: "white" }}>
+                <CartWidget />
+              </NavLink>
+            </MenuItem>
+          ) : null}
         </Toolbar>
       </AppBar>
       <div style={{ height: "80px" }}></div>

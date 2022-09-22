@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -9,14 +10,19 @@ import { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
 import ItemCount from "./ItemCount";
 
-export default function ItemDetail({ item, hideCount }) {
-  const [selectedCount, setSelectedCount] = useState(null);
+export default function ItemDetail({ item, hideCount, removeItem }) {
   const cartContext = useContext(CartContext);
+  const [selectedCount, setSelectedCount] = useState(null);
 
   function addToCart(count) {
     setSelectedCount(count);
     cartContext.addToCart(item, count);
   }
+
+  function removeThisItem() {
+    removeItem(item);
+  }
+
   return (
     <>
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
@@ -32,9 +38,16 @@ export default function ItemDetail({ item, hideCount }) {
                 />
                 <CardContent>
                   {item.count > 0 && hideCount ? (
-                    <Typography>
-                      Hay {item.count} elementos en este carrito
-                    </Typography>
+                    <>
+                      <Typography>
+                        Hay {item.count} elementos en este carrito. Precio
+                        individual de ${item.price}. Total de $
+                        {item.count * item.price}
+                      </Typography>
+                      <Button onClick={removeThisItem}>
+                        <Typography>Eliminar item</Typography>
+                      </Button>
+                    </>
                   ) : null}
                   <Typography gutterBottom variant="h5" component="div">
                     {item.title}
