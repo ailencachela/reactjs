@@ -1,14 +1,21 @@
+import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
 
-export default function ItemDetailContainer({ mockItems }) {
+export default function ItemDetailContainer() {
+  const db = getFirestore();
   const { itemId } = useParams();
   const [item, setItem] = useState(null);
 
   useEffect(() => {
-    const itemToLoad = mockItems.filter((element) => element.id === itemId)[0];
-    setItem(itemToLoad);
+    const itemCollection = collection(db, "items");
+    const prodRef = doc(itemCollection, itemId);
+    getDoc(prodRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        setItem({ id: itemId, ...snapshot.data() });
+      }
+    });
   }, [itemId]);
 
   return (

@@ -29,7 +29,6 @@ function CartContextProvider({ defaultValue = [], children }) {
       if (item.count === 0) {
         const newProds = products.filter((el) => el.id !== item.id);
         setProducts(newProds);
-        console.log(newProds);
       }
     }
   }
