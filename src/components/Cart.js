@@ -4,9 +4,11 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 import ItemDetail from "./ItemDetail";
 import { NavLink } from "react-router-dom";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 export default function Cart() {
   const cartContext = useContext(CartContext);
+  const db = getFirestore();
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -33,6 +35,32 @@ export default function Cart() {
       newTotal = newTotal + el.price * el.count;
     });
     setTotal(newTotal);
+  }
+
+  function buyProductsInCart() {
+    let total = 0;
+    const today = new Date();
+    const date =
+      today.getDate() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getFullYear();
+    cartContext.products.map((prod) => {
+      total = total + prod.price * prod.count;
+    });
+    const order = {
+      buyer: {
+        name: "Juana",
+        phone: "1123230101",
+        email: "juana-raiachich@gmail.com",
+      },
+      items: cartContext.products,
+      date: date,
+      total: total,
+    };
+    const orderCollection = collection(db, "orders");
+    addDoc(orderCollection, order).then(({ id }) => (order.id = id));
   }
 
   return (
@@ -64,7 +92,13 @@ export default function Cart() {
               <NavLink to="/">Ir al inicio</NavLink>
             </Button>
           </>
-        ) : null}
+        ) : (
+          <>
+            <Button onClick={buyProductsInCart} style={{ width: "100%" }}>
+              <Typography>Finalizar Compra</Typography>
+            </Button>
+          </>
+        )}
       </Box>
     </>
   );
