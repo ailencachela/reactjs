@@ -6,6 +6,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import AboutUs from "./components/AboutUs";
 import Cart from "./components/Cart";
 import { CartContextProvider } from "./components/CartContext";
+import Category from "./components/Category";
 import {
   getFirestore,
   collection,
@@ -16,6 +17,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
+import Categories from "./components/Categories";
 
 function App() {
   const db = getFirestore();
@@ -59,11 +61,16 @@ function App() {
             />
             <Route
               exact
-              path="/category"
-              element={
-                <ItemListContainer productsAvailable={productsAvailable} />
-              }
+              path="/categories"
+              element={<Categories productsAvailable={productsAvailable} />}
             />
+
+            <Route
+              exact
+              path="/categories/:categoryId"
+              element={<Category productsAvailable={productsAvailable} />}
+            />
+
             <Route
               exact
               path="/item/:itemId"

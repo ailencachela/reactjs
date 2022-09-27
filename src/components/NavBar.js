@@ -13,9 +13,9 @@ export default function NavBar() {
       url: "/",
     },
     {
-      id: "category",
+      id: "categories",
       name: "Categorías",
-      url: "/category",
+      url: "/categories",
     },
     {
       id: "about-us",
