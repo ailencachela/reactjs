@@ -35,10 +35,12 @@ export default function CartUser({ buyItems }) {
 
     if (confirmEmail === "") {
       alert("Tienes que ingresar por segunda vez tu email");
+      return false;
     }
 
     if (email !== confirmEmail) {
       alert("Los emails ingresados no coinciden");
+      return false;
     }
     return true;
   }
