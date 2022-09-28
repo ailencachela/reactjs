@@ -5,6 +5,7 @@ import { CartContext } from "./CartContext";
 import ItemDetail from "./ItemDetail";
 import { NavLink } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import CartUser from "./CartUser";
 
 export default function Cart() {
   const cartContext = useContext(CartContext);
@@ -37,7 +38,7 @@ export default function Cart() {
     setTotal(newTotal);
   }
 
-  function buyProductsInCart() {
+  function buyProductsInCart(buyer) {
     let total = 0;
     const today = new Date();
     const date =
@@ -50,17 +51,17 @@ export default function Cart() {
       total = total + prod.price * prod.count;
     });
     const order = {
-      buyer: {
-        name: "Juana",
-        phone: "1123230101",
-        email: "juana-raiachich@gmail.com",
-      },
+      buyer: buyer,
       items: cartContext.products,
       date: date,
       total: total,
     };
     const orderCollection = collection(db, "orders");
-    addDoc(orderCollection, order).then(({ id }) => (order.id = id));
+    addDoc(orderCollection, order).then(({ id }) => {
+      alert(
+        `Has comprado invertido $${total} en nuestros productos. Muchas gracias! El ID de tu compra es ${id}`
+      );
+    });
   }
 
   return (
@@ -94,9 +95,7 @@ export default function Cart() {
           </>
         ) : (
           <>
-            <Button onClick={buyProductsInCart} style={{ width: "100%" }}>
-              <Typography>Finalizar Compra</Typography>
-            </Button>
+            <CartUser buyItems={buyProductsInCart} />
           </>
         )}
       </Box>
